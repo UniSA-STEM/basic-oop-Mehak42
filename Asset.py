@@ -39,9 +39,9 @@ class Asset:
 
     def __str__(self):
         if self.__encrypted:
-            return "{self.__name}: {self.__description} [Encrypted]"
+            return f"{self.__name}: {self.__description} [Encrypted]"
         else:
-            return "{self.__name}: {self.__description}"
+            return f"{self.__name}: {self.__description}"
 
 
 
