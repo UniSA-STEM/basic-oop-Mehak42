@@ -14,6 +14,7 @@ class Asset:
         self.description = description
         self.encrypted = False
 
+"""getters and setters defined """
     def get_name(self):
         return self.name
     def get_description(self):
