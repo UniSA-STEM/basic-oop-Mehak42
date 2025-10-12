@@ -63,10 +63,40 @@ class Rig:
             self.__broken = True
 
     def generate_assets(self):
-        for asset in self.__storage: pass
+        """Generates new assets and adds it to the storage"""
+        spawn_assets = random.randint(1, 3)
+        if spawn_assets == 1:
+            new_asset = Asset("Data Spike", "Used in battles")
+            print(f"{self.__name} generated a Data Spike.")
+        elif spawn_assets == 2:
+            new_asset = Asset("Removable Drive", "Used for extraction")
+            print(f"{self.__name} generated a Removable Drive.")
+        elif spawn_assets == 3:
+            new_asset = Asset("Security Chip", "Used for encryption and decryption")
+            print(f"{self.__name} generated a Security Chip.")
 
     def store_assets(self, asset):
-        self.__storage.append(asset)
+        """stores new assets inside rig's storage if it's not encrypted"""
+        if asset.encrypted:
+            print(f"Cannot store {asset.name} : asset is encrypted.")
+        else:
+            self.__storage.append(asset)
+            print(f"{asset.name} stored in {self.__name}")
 
     def release_asset(self, asset_name):
-        self.__storage.remove(asset_name)
+        """releases asset from rig's storage if it's not encrypted"""
+        for asset in self.__storage:
+            if asset.name == asset_name:
+                if asset.encrypted:
+                    print(f"Cannot release asset {asset.name} : asset is encrypted.")
+                    return None
+                else:
+                    self.__storage.remove(asset)
+                    print(f"{asset.name} released from {self.__name}")
+                    return asset
+        else:
+            print(f"{asset.name} asset {self.__name} not found.")
+            return None
+
+
+
