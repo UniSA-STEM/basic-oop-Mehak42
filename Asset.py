@@ -21,12 +21,12 @@ class Asset:
         return self.__description
     def get_encrypted(self):
         return self.__encrypted
-    def set_name(self, value):
-        self.__name = value
-    def set_description(self, value):
-        self.__description = value
-    def set_encrypted(self, value):
-        self.__encrypted = bool(value)
+    def set_name(self, name):
+        self.__name = name
+    def set_description(self, description):
+        self.__description = description
+    def set_encrypted(self, encrypted):
+        self.__encrypted = bool(encrypted)
 
     """Using property attribute to make use of getter and setter in the other classes"""
     name = property(get_name,set_name)

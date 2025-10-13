@@ -34,16 +34,16 @@ class Rig:
         return self.__storage
     def get_upgrade_level(self):
         return self.__upgrade_level
-    def set_name(self, value):
-        self.__name = value
-    def set_damage(self, value):
-        self.__damage = value
-    def set_broken(self, value):
-        self.__broken = bool(value)
-    def set_storage(self, value):
-        self.__storage = value
-    def set_upgrade_level(self, value):
-        self.__upgrade_level = value
+    def set_name(self, name):
+        self.__name = name
+    def set_damage(self, damage):
+        self.__damage = damage
+    def set_broken(self, broken):
+        self.__broken = bool(broken)
+    def set_storage(self, storage):
+        self.__storage = storage
+    def set_upgrade_level(self, upgrade_level):
+        self.__upgrade_level = upgrade_level
 
     name = property(get_name, set_name)
     damage = property(get_damage, set_damage)
