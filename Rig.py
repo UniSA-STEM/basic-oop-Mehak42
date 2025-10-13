@@ -58,6 +58,7 @@ class Rig:
         pass
 
     def take_hits(self):
+        """increases damage by 1. if damage reaches 2, rig becomes broken"""
         self.__damage += 1
         if self.__damage >= 2:
             self.__broken = True
@@ -97,6 +98,17 @@ class Rig:
         else:
             print(f"{asset.name} asset {self.__name} not found.")
             return None
+
+    def rig_condition(self):
+        """returns rig's condition based on damage and upgrade level"""
+        if self.__broken:
+            return f"Broken (Level {self.__upgrade_level})"
+        return f"Pristine (Level {self.__upgrade_level})"
+
+    def __str__(self):
+        """prints rig's name, condition, upgrade level and stored assets"""
+        total_assets = ", ".join(str(asset) for asset in self.__storage)
+        return f"{self.__name} - {self.rig_condition()} | Stored Assets: {total_assets}"
 
 
 
