@@ -66,3 +66,23 @@ class Hacker:
         print(f"No data spike found for {self.__name}")
 
 
+    def extract_assets(self, target_rig):
+        if not target_rig.broken:
+            print("Target rig is not broken yet. No assets will be extracted.")
+            return
+        removable_drive_available = False
+        for asset in self.__inventory:
+            if asset.name == "RemovableDrive":
+                self.__inventory.remove(asset)
+                removable_drive_available = True
+                print("Removable drive is available and used for extraction")
+                break
+
+        if not removable_drive_available:
+            print("No removable drive found in the inventory")
+
+        for a in list(target_rig.storage):
+            if not a.encrypted:
+                self.__inventory.append(a)
+                target_rig.storage.remove(a)
+        print("f{self.__name} extracted unsecured assets from {target_rig.name}'s inventory")
