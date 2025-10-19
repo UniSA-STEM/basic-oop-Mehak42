@@ -192,7 +192,7 @@ class Hacker:
 
 
     def __str__(self):
-        rig_name = self.__rig.name
+        rig_name = self.__rig.name if self.__rig else "No Rig"
         total_items = ",".join(str(a) for a in self.__inventory)
         return f"Hacker: {self.__name} | Rig: {rig_name} | Trace: {self.__trace_level} | Inventory: {total_items}"
 

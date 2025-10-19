@@ -52,10 +52,15 @@ class Rig:
     storage = property(get_storage, set_storage)
 
     def repair(self):
-        pass
+        if self.__broken:
+            self.__damage = 0
+            self.__broken = False
+            print(f"{self.__name} has been repaired")
+        else:
+            print(f"{self.__name} does not need repair")
 
     def upgrade(self):
-        pass
+        self.__upgrade_level += 1
 
     def take_hits(self):
         """increases damage by 1. if damage reaches 2, rig becomes broken"""
