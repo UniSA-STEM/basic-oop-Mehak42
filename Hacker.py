@@ -136,5 +136,52 @@ class Hacker:
                     return
         print(f"{asset_name} not found in inventory")
 
-    def
+    def upgrade_rig(self):
+        if self.__rig is None:
+            print("No rig is available to upgrade")
+            return
+
+        for asset in self.__inventory:
+            if asset.name == "Hardware Patch":
+                self.__inventory.remove(asset)
+                self.__rig.upgrade()
+                print("f{asset_name} upgraded")
+                return
+
+        print("No Hardware Patch found in the inventory")
+
+    def store_asset(self, asset_name):
+        if self.__rig is None:
+            print("No rig is available to store")
+            return
+
+        for a in self.__inventory:
+            if a.name == asset_name:
+                if not a.encrypted:
+                    self.__inventory.remove(a)
+                    self.__rig.storage.append(a)
+                    print("f{asset_name} stored in Rig's storage")
+                else:
+                    print("f{asset_name} is encrypted. Cannot store.")
+                return
+        print(f"{asset_name} not found in rig's storage")
+
+    def retrieve_asset(self, asset_name):
+        if self.__rig is None:
+            print("No rig is available to store")
+            return
+
+        for a in self.__inventory:
+            if a.name == asset_name:
+                if not a.encrypted:
+                    self.__rig.storage.remove(a)
+                    self.__inventory.append(a)
+                    print("f{asset_name} retrieved from Rig's storage")
+                else:
+                    print("f{asset_name} is encrypted. Cannot retrieve.")
+                    return
+        print(f"{asset_name} not found in rig's storage")
+
+    def scan_inventory(self):
+
 
