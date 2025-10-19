@@ -182,6 +182,18 @@ class Hacker:
                     return
         print(f"{asset_name} not found in rig's storage")
 
-    def scan_inventory(self):
+    def scan_inventory(self, asset_name):
+        for a in self.__inventory:
+            if a.name == asset_name:
+                self.__inventory.remove(a)
+                print("f{asset_name} removed from inventory")
+                return
+        print(f"{asset_name} not found in inventory")
+
+
+    def __str__(self):
+        rig_name = self.__rig.name
+        total_items = ",".join(str(a) for a in self.__inventory)
+        return f"Hacker: {self.__name} | Rig: {rig_name} | Trace: {self.__trace_level} | Inventory: {total_items}"
 
 
