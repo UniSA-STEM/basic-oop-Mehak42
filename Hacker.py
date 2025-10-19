@@ -86,3 +86,55 @@ class Hacker:
                 self.__inventory.append(a)
                 target_rig.storage.remove(a)
         print("f{self.__name} extracted unsecured assets from {target_rig.name}'s inventory")
+
+    def encrypt_asset(self, asset_name):
+        security_chip_available = False
+        for a in self.__inventory:
+            if a.name == "Security Chip":
+                security_chip_available = True
+                break
+        if not security_chip_available:
+            print("No security chip found in the inventory")
+            return
+
+        for objects in self.__inventory:
+            if objects.name == asset_name:
+                objects.encrypted = True
+                print("f{asset_name} encrypted")
+                return
+
+        if self.__rig is not None:
+            for items in self.__rig.storage:
+                if items.name == asset_name:
+                    items.encrypted = True
+                    print("f{asset_name} encrypted in Rig's storage")
+                    return
+
+        print(f"{asset_name} not found in inventory")
+
+    def decrypt_asset(self, asset_name):
+        security_chip_available = False
+        for a in self.__inventory:
+            if a.name == "Security Chip":
+                security_chip_available = True
+                break
+        if not security_chip_available:
+            print("No security chip found in the inventory")
+            return
+
+        for objects in self.__inventory:
+            if objects.name == asset_name:
+                objects.encrypted = False
+                print("f{asset_name} has been decrypted")
+                return
+
+        if self.__rig is not None:
+            for items in self.__rig.storage:
+                if items.name == asset_name:
+                    items.encrypted = False
+                    print("f{asset_name} decrypted in Rig's storage")
+                    return
+        print(f"{asset_name} not found in inventory")
+
+    def
+
