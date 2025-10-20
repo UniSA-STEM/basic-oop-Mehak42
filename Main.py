@@ -29,3 +29,4 @@ print(test_hacker)
 
 test_hacker.acquire_rig()
 print(test_hacker)
+print(test_hacker)
