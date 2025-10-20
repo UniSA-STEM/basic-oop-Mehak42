@@ -18,6 +18,7 @@ class Hacker:
         self.__trace_level = 0
         self.__exposed = False
 
+        # Every hacker starts with one CryptoToken by default
         self.__inventory.append(Asset("CryptoToken", "Used to acquire or repair rigs"))
 
     def get_name(self):
@@ -39,6 +40,7 @@ class Hacker:
     trace_level = property(get_trace_level, set_trace_level)
 
     def acquire_rig(self):
+        """Uses cryptotoken to acquire rig"""
         for asset in self.__inventory:
             if asset.name == "CryptoToken":
                 self.__inventory.remove(asset)
@@ -48,6 +50,7 @@ class Hacker:
         print("The Rig was not acquired: No CryptoToken available")
 
     def launch_data_spikes(self, target_rig):
+        """Attacks another rig using a Data Spike. Each successful attack increases trace level."""
         if self.__rig is None:
             print("No rig is available to attack from")
             return
@@ -67,6 +70,7 @@ class Hacker:
 
 
     def extract_assets(self, target_rig):
+        """Extracts assets from a broken rig. needs to have removable drive to perform this"""
         if not target_rig.broken:
             print("Target rig is not broken yet. No assets will be extracted.")
             return
@@ -89,6 +93,7 @@ class Hacker:
         print(f"{self.__name} extracted unsecured assets from {target_rig.name}'s inventory")
 
     def encrypt_asset(self, asset_name):
+        """encrypts assets using security chip"""
         security_chip_available = False
         for a in self.__inventory:
             if a.name == "Security Chip":
@@ -114,6 +119,7 @@ class Hacker:
         print(f"{asset_name} not found in inventory")
 
     def decrypt_asset(self, asset_name):
+        """decrypts assets using security chip"""
         security_chip_available = False
         for a in self.__inventory:
             if a.name == "Security Chip":
@@ -138,6 +144,7 @@ class Hacker:
         print(f"{asset_name} not found in inventory")
 
     def upgrade_rig(self):
+        """uses hardware patches to upgrade rig"""
         if self.__rig is None:
             print("No rig is available to upgrade")
             return
@@ -152,6 +159,7 @@ class Hacker:
         print("No Hardware Patch found in the inventory")
 
     def store_asset(self, asset_name):
+        """moves assets from hacker's inventory to rig's storage"""
         if self.__rig is None:
             print("No rig is available to store")
             return
@@ -168,6 +176,7 @@ class Hacker:
         print(f"{asset_name} not found in rig's storage")
 
     def retrieve_asset(self, asset_name):
+        """moves assets from rig's storage to hacker's inventory"""
         if self.__rig is None:
             print("No rig is available to store")
             return
@@ -185,6 +194,7 @@ class Hacker:
         print(f"{asset_name} not found in rig's storage")
 
     def scan_inventory(self, asset_name):
+        """removes assets from hacker's inventory"""
         for a in self.__inventory:
             if a.name == asset_name:
                 self.__inventory.remove(a)
