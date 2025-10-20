@@ -37,7 +37,7 @@ class Rig:
     def set_name(self, name):
         self.__name = name
     def set_damage(self, damage):
-        self.__damage = damage
+        self.__damage = max(0, int(damage))
     def set_broken(self, broken):
         self.__broken = bool(broken)
     def set_storage(self, storage):
@@ -101,7 +101,7 @@ class Rig:
                     print(f"{asset.name} released from {self.__name}")
                     return asset
         else:
-            print(f"{asset.name} asset {self.__name} not found.")
+            print(f"{asset_name} asset {self.__name} not found.")
             return None
 
     def rig_condition(self):
