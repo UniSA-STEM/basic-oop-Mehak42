@@ -1,32 +1,87 @@
-"""
-File: main.py
-Description: <A brief description of this Python module.>
-Author: <full name>
-ID: <student_id>
-Username: <username>
-This is my own work as defined by the University's Academic Misconduct Policy.
-"""
-# Testing Asset class
+# """
+# File: main.py
+# Description: Testing hacker, rig and asset class
+# Author: Mehakdeep Kaur Tiwana
+# ID: 110397073
+# Username: TIWMY001
+# This is my own work as defined by the University's Academic Misconduct Policy.
+# """
+
 from Asset import Asset
 from Hacker import Hacker
 from Rig import Rig
 
-# token = Asset("CryptoToken", "Used to acquire or repair rigs")
-# print(token)
-#
-# token.switch_encryption()
-# print(token)
-#
-# print("Encrypted state:", token.encrypted)
-# token.encrypted = False
-# print("After decrypting :", token)
+# Creating two hackers
+attacker = Hacker("Alpha")
+defender = Hacker("Beta")
 
-# test_rig = Rig("Alpha")
-# print(test_rig)
+attacker.acquire_rig()
+defender.acquire_rig()
 
-test_hacker = Hacker("Alpha")
-print(test_hacker)
+print("Initial:")
+print(attacker)
+print(defender)
 
-test_hacker.acquire_rig()
-print(test_hacker)
-print(test_hacker)
+# --- Prepare attacker inventory ---
+attacker.inventory.append(Asset("Data Spike", "Used in battles."))
+attacker.inventory.append(Asset("Data Spike", "Used in battles."))
+attacker.inventory.append(Asset("Removable Drive", "Used for extraction."))
+attacker.inventory.append(Asset("Security Chip", "Used to encrypt/decrypt assets."))
+attacker.inventory.append(Asset("Hardware Patch", "Used to upgrade rigs."))
+
+# Put one encrypted and one unencrypted asset into defender's rig
+defender.rig.storage.append(Asset("Data Spike", "Used in battles."))
+secret = Asset("Encrypted data - secret", "Very sensitive info.")
+secret.encrypted = True
+defender.rig.storage.append(secret)
+
+#After populating inventories / rigs:
+print("Attacker:", attacker)
+print("Defender:", defender)
+
+# Attack prep : filling up Attacker's storage with data spikes which are gonna be used for attacking
+attacker.store_asset("Data Spike")
+attacker.store_asset("Data Spike")
+
+#Attacker after storing spikes into own rig:
+print(attacker)
+
+# --- Attack done: launch Data Spikes until defender's rig is broken ---
+while not defender.rig.broken:
+    # check if attacker has any Data Spike in their rig
+    if not any(a.name == "Data Spike" for a in attacker.rig.storage):
+        print("Attacker has no Data Spikes left in rig to launch.")
+        break
+    attacker.launch_data_spikes(defender.rig)
+
+#After attack
+print("Defender rig condition:", defender.rig.rig_condition())
+print(defender)
+
+#  Extraction: attacker extracts unsecured assets (requires Removable Drive) ---
+print("\n--- Extraction ----")
+attacker.extract_assets(defender.rig)
+
+# If encrypted assets remain in defender's rig and attacker has a Security Chip,
+# decrypt them then extract again.
+if any(a.name == "Security Chip" for a in attacker.inventory):
+    print("\nAttacker has a Security Chip — decrypting encrypted assets in Defender's rig...")
+    for asset in list(defender.rig.storage):
+        if asset.encrypted:
+            asset.encrypted = False
+            print(f"Decrypted {asset.name} in Defender's rig.")
+else:
+    print("\nAttacker does not have a Security Chip, no decryption needed.")
+
+print("\n--- Extraction (after decryption) ---")
+attacker.extract_assets(defender.rig)
+
+print("\nResult after extraction:")
+print("Attacker:", attacker)
+print("Defender:", defender)
+
+# --- Upgrade attacker's rig with Hardware Patch if present ---
+print("\n--- Upgrade step ---")
+attacker.upgrade_rig()
+print("\nFinal attacker state:")
+print(attacker)
