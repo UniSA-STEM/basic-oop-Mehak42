@@ -68,8 +68,9 @@ class Rig:
         if self.__damage >= 2:
             self.__broken = True
 
-    def generate_assets(self, new_asset):
+    def generate_assets(self):
         """Generates new assets and adds it to the storage"""
+        new_asset = None
         spawn_assets = random.randint(1, 3)
         if spawn_assets == 1:
             new_asset = Asset("Data Spike", "Used in battles")

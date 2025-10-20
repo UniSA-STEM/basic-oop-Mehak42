@@ -53,7 +53,7 @@ class Hacker:
             return
 
         for asset in self.__rig.storage:
-            if asset.name == "DataSpike" and not asset.encrypted:
+            if asset.name == "Data Spike" and not asset.encrypted:
                 self.__rig.storage.remove(asset)
                 target_rig.take_hits()
                 self.__trace_level += 1
@@ -71,8 +71,8 @@ class Hacker:
             print("Target rig is not broken yet. No assets will be extracted.")
             return
         removable_drive_available = False
-        for asset in self.__inventory:
-            if asset.name == "RemovableDrive":
+        for asset in list(self.__inventory):
+            if asset.name == "Removable Drive":
                 self.__inventory.remove(asset)
                 removable_drive_available = True
                 print("Removable drive is available and used for extraction")
@@ -80,6 +80,7 @@ class Hacker:
 
         if not removable_drive_available:
             print("No removable drive found in the inventory")
+            return
 
         for a in list(target_rig.storage):
             if not a.encrypted:
@@ -171,12 +172,13 @@ class Hacker:
             print("No rig is available to store")
             return
 
-        for a in self.__inventory:
+        for a in self.__rig.storage:
             if a.name == asset_name:
                 if not a.encrypted:
                     self.__rig.storage.remove(a)
                     self.__inventory.append(a)
                     print(f"{asset_name} retrieved from Rig's storage")
+                    return
                 else:
                     print(f"{asset_name} is encrypted. Cannot retrieve.")
                     return
