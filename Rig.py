@@ -68,7 +68,7 @@ class Rig:
         if self.__damage >= 2:
             self.__broken = True
 
-    def generate_assets(self):
+    def generate_assets(self, new_asset):
         """Generates new assets and adds it to the storage"""
         spawn_assets = random.randint(1, 3)
         if spawn_assets == 1:
@@ -80,6 +80,8 @@ class Rig:
         elif spawn_assets == 3:
             new_asset = Asset("Security Chip", "Used for encryption and decryption")
             print(f"{self.__name} generated a Security Chip.")
+
+        self.__storage.append(new_asset)
 
     def store_assets(self, asset):
         """stores new assets inside rig's storage if it's not encrypted"""
@@ -100,9 +102,9 @@ class Rig:
                     self.__storage.remove(asset)
                     print(f"{asset.name} released from {self.__name}")
                     return asset
-        else:
-            print(f"{asset_name} asset {self.__name} not found.")
-            return None
+
+        print(f"{asset_name} asset {self.__name} not found.")
+        return None
 
     def rig_condition(self):
         """returns rig's condition based on damage and upgrade level"""
