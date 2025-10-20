@@ -85,7 +85,7 @@ class Hacker:
             if not a.encrypted:
                 self.__inventory.append(a)
                 target_rig.storage.remove(a)
-        print("f{self.__name} extracted unsecured assets from {target_rig.name}'s inventory")
+        print(f"{self.__name} extracted unsecured assets from {target_rig.name}'s inventory")
 
     def encrypt_asset(self, asset_name):
         security_chip_available = False
@@ -100,14 +100,14 @@ class Hacker:
         for objects in self.__inventory:
             if objects.name == asset_name:
                 objects.encrypted = True
-                print("f{asset_name} encrypted")
+                print(f"{asset_name} encrypted")
                 return
 
         if self.__rig is not None:
             for items in self.__rig.storage:
                 if items.name == asset_name:
                     items.encrypted = True
-                    print("f{asset_name} encrypted in Rig's storage")
+                    print(f"{asset_name} encrypted in Rig's storage")
                     return
 
         print(f"{asset_name} not found in inventory")
@@ -125,14 +125,14 @@ class Hacker:
         for objects in self.__inventory:
             if objects.name == asset_name:
                 objects.encrypted = False
-                print("f{asset_name} has been decrypted")
+                print(f"{asset_name} has been decrypted")
                 return
 
         if self.__rig is not None:
             for items in self.__rig.storage:
                 if items.name == asset_name:
                     items.encrypted = False
-                    print("f{asset_name} decrypted in Rig's storage")
+                    print(f"{asset_name} decrypted in Rig's storage")
                     return
         print(f"{asset_name} not found in inventory")
 
@@ -145,7 +145,7 @@ class Hacker:
             if asset.name == "Hardware Patch":
                 self.__inventory.remove(asset)
                 self.__rig.upgrade()
-                print("f{asset_name} upgraded")
+                print(f"{asset.name} upgraded")
                 return
 
         print("No Hardware Patch found in the inventory")
@@ -160,9 +160,9 @@ class Hacker:
                 if not a.encrypted:
                     self.__inventory.remove(a)
                     self.__rig.storage.append(a)
-                    print("f{asset_name} stored in Rig's storage")
+                    print(f"{asset_name} stored in Rig's storage")
                 else:
-                    print("f{asset_name} is encrypted. Cannot store.")
+                    print(f"{asset_name} is encrypted. Cannot store.")
                 return
         print(f"{asset_name} not found in rig's storage")
 
@@ -176,9 +176,9 @@ class Hacker:
                 if not a.encrypted:
                     self.__rig.storage.remove(a)
                     self.__inventory.append(a)
-                    print("f{asset_name} retrieved from Rig's storage")
+                    print(f"{asset_name} retrieved from Rig's storage")
                 else:
-                    print("f{asset_name} is encrypted. Cannot retrieve.")
+                    print(f"{asset_name} is encrypted. Cannot retrieve.")
                     return
         print(f"{asset_name} not found in rig's storage")
 
@@ -186,7 +186,7 @@ class Hacker:
         for a in self.__inventory:
             if a.name == asset_name:
                 self.__inventory.remove(a)
-                print("f{asset_name} removed from inventory")
+                print(f"{asset_name} removed from inventory")
                 return
         print(f"{asset_name} not found in inventory")
 
