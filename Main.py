@@ -62,8 +62,7 @@ print(defender)
 print("\n--- Extraction ----")
 attacker.extract_assets(defender.rig)
 
-# If encrypted assets remain in defender's rig and attacker has a Security Chip,
-# decrypt them then extract again.
+# If encrypted assets remain in defender's rig and attacker has a Security Chip, decrypt them then extract again.
 if any(a.name == "Security Chip" for a in attacker.inventory):
     print("\nAttacker has a Security Chip — decrypting encrypted assets in Defender's rig...")
     for asset in list(defender.rig.storage):
